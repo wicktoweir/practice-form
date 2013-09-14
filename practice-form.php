@@ -1,6 +1,6 @@
 <?php 
   $name = '';
-  $error = '';
+  $errors = [];
   $city = '';
 
 /*first we want to check to see if the form has been submitted, 
@@ -22,20 +22,20 @@ and create a variable $name with the value entered into the form.*/
 equal to the length of 5 characters. If it is less than 5 chars
 the $error message is set.*/
       if (strlen($name) <= 1) {
-        $error="Get a longer name, please";
+        $errors["name"]="Get a longer name, please";
       }
 /*The if statement below is checking whether or not the characters
 are alphabetical characters or not. If they are not alphabetical 
 the error message is set.*/
       if (!ctype_alpha($name)) {
-        $error="Get out of here, robot";
+        $errors["name"]="Get out of here, robot";
       }
 /*This else statement goes back to the !empty($_POST["name])
 if statement above. If the name input is not empty the variable
 $name will be created as established above. If it is empty the 
 error below will appear.*/  
     } else {
-      $error="You must fill out a name!";
+      $errors["name"]="You must fill out a name!";
     }
 
 
@@ -44,13 +44,13 @@ error below will appear.*/
     {
       $city=$_POST["city"];
       if (strlen($city) <= 2) {
-        $error="Please fill out a legitimate city!";
+        $errors["city"]="Please fill out a legitimate city!";
       }
       if (!ctype_alpha($city)) {
-        $error="All of the cities I know only have letters";
+        $errors["city"]="All of the cities I know only have letters";
       }  
     } else {
-      $error="You must fill out a city!";
+      $errors["city"]="You must fill out a city!";
     }
   }
 ?>
@@ -62,11 +62,10 @@ error below will appear.*/
 </head>
 <body>
   <?php
-/*This is saying that if the $error variable is set from any of the 
-conditions above the error message will be echoed out in a paragraph.*/
-    if (isset($error))
-    {
-      echo "<p>" . $error . "</p>";
+    foreach($errors as $error) {
+      echo "<p>";
+      echo $error;
+      echo "</p>";
     }
   ?>
 <!--The action on the form is submitting the form to itself.--> 
