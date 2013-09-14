@@ -21,7 +21,7 @@ and create a variable $name with the value entered into the form.*/
 /*The if statement below is asking if the name is less than or 
 equal to the length of 5 characters. If it is less than 5 chars
 the $error message is set.*/
-      if (strlen($name) <= 5) {
+      if (strlen($name) <= 1) {
         $error="Get a longer name, please";
       }
 /*The if statement below is checking whether or not the characters
